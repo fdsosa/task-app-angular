@@ -1,0 +1,26 @@
+.boxForm{
+	padding: 3rem 2rem;
+	width: 40%;
+	flex-direction: column;
+	user-select: none;
+
+    form{
+        width: 100%;
+        background-color: #fff;
+    }
+
+    .user-img{
+        width: 30%;
+        margin: auto;
+        padding: 2rem 0;
+        text-align: center;
+
+        i{
+            font-size: 7rem;
+        }
+    }
+
+    h2{
+        text-align: center;
+    }
+}        
