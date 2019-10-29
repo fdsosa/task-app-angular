@@ -1,0 +1,18 @@
+.boxTask{
+	width: 90%;
+	margin-top: 6vh;
+    max-width: none;
+    
+    form{
+        width: 40%;
+        padding: 2rem 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+
+    .taskList{
+        width: 50%;
+        margin: auto;
+        margin-top: 0;
+    }
+}    
