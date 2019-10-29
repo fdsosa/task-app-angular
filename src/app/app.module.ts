@@ -9,6 +9,7 @@ import { HomeContentComponent } from './components/home-content/home-content.com
 import { LoginComponent } from './components/login/login.component';
 import { JoinComponent } from './components/join/join.component';
 import { UserComponent } from './components/user/user.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 const appRoutes: Routes = [
   {
@@ -21,7 +22,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'contact',
-    component: HomeComponent
+    component: ContactComponent
   },
   {
     path: 'login',
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     HomeContentComponent,
     LoginComponent,
     JoinComponent,
-    UserComponent
+    UserComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
