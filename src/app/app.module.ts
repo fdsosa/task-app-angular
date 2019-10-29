@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { AppComponent } from './app.component';
 import { HomeContentComponent } from './components/home-content/home-content.component';
 import { LoginComponent } from './components/login/login.component';
+import { JoinComponent } from './components/join/join.component';
 
 const appRoutes: Routes = [
   {
@@ -24,6 +25,10 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'join',
+    component: JoinComponent
   }
     
 ]
@@ -34,7 +39,8 @@ const appRoutes: Routes = [
     HomeComponent,
     HeaderComponent,
     HomeContentComponent,
-    LoginComponent
+    LoginComponent,
+    JoinComponent
   ],
   imports: [
     BrowserModule,
