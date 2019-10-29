@@ -1,0 +1,36 @@
+nav{
+    justify-content: left;
+
+    a{
+        width: 10%;
+    }
+
+    .links{
+        width: 65%;
+
+        ul{
+            flex-direction: row;
+            
+            li{
+                margin: 0 .5rem;
+            }
+        }
+    }
+
+    .sign{
+        width: 20%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        a{
+            width: auto;
+            margin: 0 .2rem;
+        }
+
+        .link-up{
+            color: white;
+            font-size: .8rem;
+        }
+    }
+}

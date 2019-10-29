@@ -1,0 +1,34 @@
+.boxContact{
+    display: inline-flex;
+	padding: 3rem 2rem;
+    width: 100%;
+    margin: 0 0;
+
+    .left{
+        display: flex;
+        width: 50%;
+
+        h4{
+            text-align: center;
+        }
+
+        .card{
+            border: none;
+
+        }
+    
+        form{
+            width: 80%;
+            background-color: #fff;
+            border: none;
+        }
+    }
+
+    .right{
+        width: 50%;
+
+        h4{
+            text-align: center;
+        }
+    }
+}  
