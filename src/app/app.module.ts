@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AppComponent } from './app.component';
+import { HomeContentComponent } from './components/home-content/home-content.component';
 
 const appRoutes: Routes = [
   {
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeContentComponent
   ],
   imports: [
     BrowserModule,
