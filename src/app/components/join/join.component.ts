@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { JoinModel } from '../../models/join-form';
+import { JoinFormService } from '../../services/join-form.service';
 
 @Component({
   selector: 'app-join',
@@ -14,7 +15,7 @@ export class JoinComponent implements OnInit {
   submitted = false;
   passMatch: boolean = true;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private joinService: JoinFormService) { }
 
   ngOnInit() {
     this.joinForm = this.formBuilder.group({
@@ -58,6 +59,8 @@ export class JoinComponent implements OnInit {
     )
     
     console.log(this.joinModel)
+
+    this.joinService.postForm(this.joinModel);
   }
 
   // convenience getter for easy access to form fields
