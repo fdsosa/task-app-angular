@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { JoinFormService } from './join-form.service';
+import { AuthService } from './auth.service';
 
 describe('JoinFormService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

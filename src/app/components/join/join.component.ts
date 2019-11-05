@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { JoinModel } from '../../models/join-form';
-import { JoinFormService } from '../../services/join-form.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { UserI } from '../../models/user';
 
 @Component({
   selector: 'app-join',
@@ -14,8 +16,10 @@ export class JoinComponent implements OnInit {
   joinModel: JoinModel;
   submitted = false;
   passMatch: boolean = true;
+  registerModel: UserI;
+  emailRepeat: boolean;
 
-  constructor(private formBuilder: FormBuilder, private joinService: JoinFormService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.joinForm = this.formBuilder.group({
@@ -58,9 +62,24 @@ export class JoinComponent implements OnInit {
       this.controls.pswd.value
     )
     
-    console.log(this.joinModel)
+    console.log(this.joinModel);
 
-    this.joinService.postForm(this.joinModel);
+    this.registerModel = {
+      id: null,
+      name: this.controls.username.value,
+      email: this.controls.email.value,
+      password: this.controls.pswd.value
+    }
+
+    this.authService.register(this.registerModel)
+      .subscribe(
+        res => {this.router.navigateByUrl('/user')},
+        err => {this.handleError(err)}
+      )
+  }
+
+  async handleError(error) {
+    this.emailRepeat = true;
   }
 
   // convenience getter for easy access to form fields
