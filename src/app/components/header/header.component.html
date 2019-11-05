@@ -11,7 +11,7 @@
         </ul>  
     </div> 
     <div class="sign">
-        <a routerLink="/login" class="btn btn-outline-light" role="button" aria-pressed="true">Sign in</a>
-        <a routerLink="/join" class="btn link-up" role="button" aria-pressed="true">Sign up</a>
+        <a routerLink="/login" class="btn btn-outline-light" role="button" aria-pressed="true" *ngIf="!token">Sign in</a>
+        <a routerLink="/join" class="btn link-up" role="button" aria-pressed="true" *ngIf="!token">Sign up</a>
     </div>
 </nav>

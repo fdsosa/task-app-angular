@@ -8,9 +8,15 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  token: boolean = false;
+
   constructor(public router: Router) { }
 
   ngOnInit() {
+    if(localStorage.getItem('ACCESS_TOKEN')){
+      console.log(true);
+      this.token = true;
+    }
   }
 
 }

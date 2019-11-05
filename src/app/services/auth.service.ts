@@ -4,6 +4,7 @@ import { UserI } from '../models/user';
 import { JwtResponseI } from '../models/jwt-response';
 import { tap } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   authSubject = new BehaviorSubject(false);
   private token: string;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private jwtHelper: JwtHelperService) { }
 
 
   register(user: UserI){
@@ -46,6 +47,14 @@ export class AuthService {
     localStorage.setItem("EXPIRES_IN", expiresIn);
     this.token = token;
   }
+
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    // Check whether the token is expired and return
+    // true or false
+    return !this.jwtHelper.isTokenExpired(token);
+  }
+
 
   
 }
