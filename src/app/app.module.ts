@@ -13,6 +13,8 @@ import { LoginComponent } from './components/login/login.component';
 import { JoinComponent } from './components/join/join.component';
 import { UserComponent } from './components/user/user.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { ErrorComponent } from './components/error/error.component';
+
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 
 const appRoutes: Routes = [
@@ -40,6 +42,10 @@ const appRoutes: Routes = [
     path: 'user',
     component: UserComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    component: ErrorComponent
   }   
 ]
 
@@ -56,7 +62,8 @@ export function tokenGetter() {
     LoginComponent,
     JoinComponent,
     UserComponent,
-    ContactComponent
+    ContactComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

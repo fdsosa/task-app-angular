@@ -3,6 +3,8 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UserI } from './../../models/user';
+import { JwtResponseI } from './../../models/jwt-response';
+
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -16,6 +18,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   loginForm: FormGroup;
   user: UserI;
+  loginRes: JwtResponseI;
   
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
@@ -46,7 +49,10 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.user)
       .subscribe(
-        res => { this.router.navigateByUrl('/user') },
+        res => { 
+          this.handleRes(res); 
+          this.router.navigateByUrl('/user')
+        },
         err => { this.handleError() }
       )
     
@@ -54,6 +60,10 @@ export class LoginComponent implements OnInit {
 
   handleError(){
     this.showErrorBox = true;
+  }
+
+  public handleRes(response: JwtResponseI){
+    this.loginRes = response;
   }
 
   get controls(){ return this.loginForm.controls }

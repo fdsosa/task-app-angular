@@ -25,6 +25,7 @@ export class AuthService {
           if(res){
             //save token
             this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
+            this.saveName(res.dataUser.name);
           } 
         }
       ))
@@ -37,6 +38,7 @@ export class AuthService {
           if(res){
             //save token
             this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
+            this.saveName(res.dataUser.name);
           }
         }
       ))
@@ -46,6 +48,10 @@ export class AuthService {
     localStorage.setItem("ACCESS_TOKEN", token);
     localStorage.setItem("EXPIRES_IN", expiresIn);
     this.token = token;
+  }
+
+  public saveName(name: string): void {
+    localStorage.setItem("USER_NAME", name);
   }
 
   public isAuthenticated(): boolean {

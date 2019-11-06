@@ -13,5 +13,15 @@
     <div class="sign">
         <a routerLink="/login" class="btn btn-outline-light" role="button" aria-pressed="true" *ngIf="!token">Sign in</a>
         <a routerLink="/join" class="btn link-up" role="button" aria-pressed="true" *ngIf="!token">Sign up</a>
+        <div class="dropdown" *ngIf="token">
+            <button class="btn link-up dropdown-toggle" type="button" (click)="toggleMenu(dropdown)" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ name }}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" #dropdown>
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
     </div>
 </nav>
