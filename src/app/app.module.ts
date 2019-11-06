@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate  } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { JwtModule } from "@auth0/angular-jwt";
 
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -10,6 +13,9 @@ import { LoginComponent } from './components/login/login.component';
 import { JoinComponent } from './components/join/join.component';
 import { UserComponent } from './components/user/user.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { ErrorComponent } from './components/error/error.component';
+
+import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 
 const appRoutes: Routes = [
   {
@@ -34,11 +40,18 @@ const appRoutes: Routes = [
   },
   {
     path: 'user',
-    component: UserComponent
-  }
-    
-    
+    component: UserComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    component: ErrorComponent
+  }   
 ]
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -49,11 +62,21 @@ const appRoutes: Routes = [
     LoginComponent,
     JoinComponent,
     UserComponent,
-    ContactComponent
+    ContactComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter
+      }
+    })
+
   ],
   providers: [],
   bootstrap: [AppComponent]
