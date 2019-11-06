@@ -14,14 +14,14 @@
         <a routerLink="/login" class="btn btn-outline-light" role="button" aria-pressed="true" *ngIf="!token">Sign in</a>
         <a routerLink="/join" class="btn link-up" role="button" aria-pressed="true" *ngIf="!token">Sign up</a>
         <div class="dropdown" *ngIf="token">
-            <button class="btn username dropdown-toggle" type="button" (click)="toggleMenu(dropdown)" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn username dropdown-toggle" type="button" (click)="toggleMenu(dropdown)">
               {{ name }}
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" #dropdown>
+            <div class="dropdown-menu" #dropdown>
               <a class="dropdown-item">Action</a>
               <a class="dropdown-item">Another action</a>
               <a class="dropdown-item" (click)="signout()">Sign Out</a>
             </div>
-          </div>
+        </div>
     </div>
 </nav>
