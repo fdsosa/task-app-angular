@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from './../../services/auth.service'
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ export class HeaderComponent implements OnInit {
   token: boolean = false;
   name: string;
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     if(localStorage.getItem('ACCESS_TOKEN')){
@@ -23,7 +24,11 @@ export class HeaderComponent implements OnInit {
 
   toggleMenu(menu: any){
     (menu.style.display == 'none') ? menu.style.display = 'block' : menu.style.display = 'none';
-    
+  }
+
+  signout(){
+    this.authService.logOut();
+    this.router.navigateByUrl('/');
   }
 
 }

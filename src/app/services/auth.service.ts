@@ -61,6 +61,12 @@ export class AuthService {
     return !this.jwtHelper.isTokenExpired(token);
   }
 
+  public logOut(): void {
+    this.token = '';
+    localStorage.removeItem("ACCESS_TOKEN");
+    localStorage.removeItem("EXPIRES_IN");
+    localStorage.removeItem("USER_NAME");
+  }
 
   
 }
