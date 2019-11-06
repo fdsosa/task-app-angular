@@ -14,5 +14,17 @@
         width: 50%;
         margin: auto;
         margin-top: 0;
+
+        .card-header{
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        a{
+            color: white;
+            font-size: .8rem;
+            float: right;
+            cursor: pointer;
+        }
     }
 }    

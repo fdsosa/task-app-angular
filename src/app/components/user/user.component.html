@@ -21,32 +21,29 @@
     </form>
     <div class="taskList">
         <!-- NORMAL TASKS -->
-        <div class="card bg-light mb-4" *ngIf="nomralTasks">
+        <div class="card bg-light mb-4">
             <div class="card-header bg-primary ">
-            Normal Tasks
-            <a href="#"><i class="fas fa-angle-double-down"></i></a>
+                Normal Tasks
+                <a (click)="toggleTasks(normalTasks)"><i class="fas fa-angle-double-down"></i></a>
             </div>
-            <div class="card-body">
-            <h5 class="card-title">Task Title</h5>
-            <p class="card-text">Description of the task to do.</p>
-            </div>
-            <div class="card-body">
-            <h5 class="card-title">Task Title</h5>
-            <p class="card-text">Description of the task to do.</p>
+            <div #normalTasks>
+                <div class="card-body" *ngFor="let task of tasks" >
+                    <h5 class="card-title">{{ task.title }}</h5>
+                    <p class="card-text">{{ task.description }}</p>
+                </div>
             </div>
         </div>
         <!-- IMPORTANT TASKS -->
-        <div class="card bg-light mb-4" *ngIf="importantTasks">
+        <div class="card bg-light mb-4">
             <div class="card-header bg-danger">
-            Important Tasks
+                Important Tasks
+                <a (click)="toggleTasks(importantTasks)"><i class="fas fa-angle-double-down"></i></a>
             </div>
-            <div class="card-body">
-            <h5 class="card-title">Task Title</h5>
-            <p class="card-text">Description of the task to do.</p>
-            </div>
-            <div class="card-body">
-            <h5 class="card-title">Task Title</h5>
-            <p class="card-text">Description of the task to do.</p>
+            <div #importantTasks>
+                <div class="card-body" *ngFor="let impTask of impTasks">
+                    <h5 class="card-title">{{ impTask.title }}</h5>
+                    <p class="card-text">{{ impTask.description }}</p>
+                </div>
             </div>
         </div>
     </div>
