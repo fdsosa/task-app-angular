@@ -50,8 +50,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.user)
       .subscribe(
         res => { 
+          console.log(res);
           this.handleRes(res); 
-          this.router.navigateByUrl('/user')
+          this.router.navigateByUrl(`/user/${res.dataUser.name}`)
         },
         err => { this.handleError() }
       )

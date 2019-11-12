@@ -1,6 +1,6 @@
-export interface TaskI{
-    id: number,
-    email: string,
-    title: string,
-    description: string
+export interface TaskI {
+    username: string;
+    title: string;
+    description: string;
+    type: string;
 }

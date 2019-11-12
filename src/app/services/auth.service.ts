@@ -25,7 +25,8 @@ export class AuthService {
           if(res){
             //save token
             this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
-            this.saveName(res.dataUser.name);
+            let personalData = { email: res.dataUser.email, name: res.dataUser.name }
+            this.saveData(personalData);
           } 
         }
       ))
@@ -38,7 +39,8 @@ export class AuthService {
           if(res){
             //save token
             this.saveToken(res.dataUser.accessToken, res.dataUser.expiresIn);
-            this.saveName(res.dataUser.name);
+            let personalData = { email: res.dataUser.email, name: res.dataUser.name }
+            this.saveData(personalData);
           }
         }
       ))
@@ -50,8 +52,8 @@ export class AuthService {
     this.token = token;
   }
 
-  public saveName(name: string): void {
-    localStorage.setItem("USER_NAME", name);
+  public saveData(name: object): void {
+    localStorage.setItem("USER_NAME", JSON.stringify(name));
   }
 
   public isAuthenticated(): boolean {

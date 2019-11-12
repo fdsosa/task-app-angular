@@ -8,16 +8,25 @@ import { Observable, BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class TaskService {
 
   readonly URL_API = 'http://localhost:3000/api';
-  authSubject = new BehaviorSubject(false);
-  private token: string;
+  data = JSON.parse(localStorage.getItem('USER_NAME'));
+  username = this.data.name;
 
   constructor(private httpClient: HttpClient) { }
 
   createTask (task: TaskI){
     return this.httpClient.post(`${this.URL_API}/user`, task)
+    .pipe(tap(
+      (res) => { 
+        console.log(res); 
+      }
+    ))
+  }
+
+  getTasks () {
+    return this.httpClient.get(`${this.URL_API}/user/${this.username}`)
   }
 
 }  
