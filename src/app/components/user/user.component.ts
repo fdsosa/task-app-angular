@@ -36,7 +36,8 @@ export class UserComponent implements OnInit {
 
     this.taskService.getTasks()
       .subscribe(
-        res => {this.listTasks(res)},
+        res => {this.listTasks(res);
+        console.log(res)},
         err => {console.log(err)}
       )
   }
@@ -57,22 +58,18 @@ export class UserComponent implements OnInit {
       description: this.controls.desc.value,
       type: this.controls.type.value
     } 
-    console.log('le envio esto');
-    console.log(this.taskModel);
-
 
     this.taskService.createTask(this.taskModel)
     .subscribe(
-      res => {console.log(res)},
+      res => {this.addTaskList(res)},
       err => {console.log(err)}
     );
-
-    this.addTaskList(this.taskModel);
     
   }
 
 
 
+  //TOGGLE TASKS FUNCTION
   toggleTasks(taskBox: any) {
     if(taskBox.style.display == 'block' || taskBox.style.display == ''){
       taskBox.style.display = 'none';
@@ -82,6 +79,9 @@ export class UserComponent implements OnInit {
   }
 
   listTasks(tasks) {
+    this.tasks = [];
+    this.impTasks = [];
+
     for(let i = 0; i < tasks.length; i++){
       if(tasks[i].type == 'Normal') {
         this.tasks.push(tasks[i])
@@ -97,6 +97,23 @@ export class UserComponent implements OnInit {
     } else {
       this.impTasks.push(task)
     }
+  }
+
+  deleteThis(task) {
+    console.log(task);
+    this.taskService.deleteTask(task._id)
+      .subscribe(
+        res => {console.log(res)},
+        err => {console.log(err)}
+      )
+
+    if(task.type == 'Normal') {
+      let index = this.tasks.indexOf(task);
+      this.tasks.splice( index, 1 )
+    } else {
+      let index = this.impTasks.indexOf(task);
+      this.impTasks.splice( index, 1 )
+    }  
   }
 
   // convenience getter for easy access to form fields

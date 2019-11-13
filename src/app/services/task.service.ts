@@ -29,4 +29,8 @@ export class TaskService {
     return this.httpClient.get(`${this.URL_API}/user/${this.username}`)
   }
 
+  deleteTask (id: string) {
+    return this.httpClient.delete(`${this.URL_API}/user/${this.username}/${id}`)
+  }
+
 }  

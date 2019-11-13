@@ -26,5 +26,20 @@
             float: right;
             cursor: pointer;
         }
+
+        .card-body{
+            p{
+                margin-bottom: .5rem;
+            }
+
+            .editButtons{
+                float: right;
+
+                i{
+                    margin: .5rem .25rem;
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }    
