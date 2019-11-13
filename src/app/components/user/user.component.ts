@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, NgForm } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -20,6 +20,7 @@ export class UserComponent implements OnInit {
   userReq: object;
   username: string; 
   typeValue: boolean;
+  updateID: string = null;
 
   constructor(private formBuilder: FormBuilder, private taskService: TaskService, private router: Router) { }
 
@@ -33,7 +34,7 @@ export class UserComponent implements OnInit {
     let dataPer = JSON.parse(localStorage.getItem('USER_NAME'));
     this.userReq = { username: dataPer.username };
     this.username = dataPer.name;
-
+    
     this.taskService.getTasks()
       .subscribe(
         res => {this.listTasks(res);
@@ -53,18 +54,40 @@ export class UserComponent implements OnInit {
 
     //CREATE A MODEL WITH VALUES    
     this.taskModel = {
+      id: null,
       username: this.username,
       title: this.controls.title.value,
       description: this.controls.desc.value,
       type: this.controls.type.value
     } 
+    console.log(this.taskForm.controls)
 
-    this.taskService.createTask(this.taskModel)
-    .subscribe(
-      res => {this.addTaskList(res)},
-      err => {console.log(err)}
-    );
-    
+    if(this.updateID != null){
+
+      console.log('UPDATE' + this.updateID)
+      //UPDATE TASK
+      this.taskService.editTask(this.updateID, this.taskModel)
+      .subscribe(
+        res => { this.updateTaskItem(res, this.taskModel)},
+        err => {console.log(err)}
+      )
+
+      this.updateID = null;
+      this.taskForm.reset();
+
+    }else{
+      console.log('CREATE')
+
+      //CREATE TASK
+      this.taskService.createTask(this.taskModel)
+      .subscribe(
+        res => {this.addTaskList(res)},
+        err => {console.log(err)}
+      );
+
+      this.taskForm.reset();
+
+    }
   }
 
 
@@ -91,12 +114,42 @@ export class UserComponent implements OnInit {
     }
   }
 
+  //UPDATE ITEM VIEW
+  updateTaskItem(oldTask, newTask) {
+    if( oldTask.type == 'Normal' ) {
+      //IF NORMAL TASK
+      for(let i = 0; i < this.tasks.length; i++) {
+        if(oldTask._id == this.tasks[i]._id) {
+          this.tasks[i].title = newTask.title;
+          this.tasks[i].description = newTask.description;
+        }
+      }
+    } else {
+      //IF IMPORTANT TASK
+      for(let i = 0; i < this.impTasks.length; i++) {
+        if(oldTask._id == this.impTasks[i]._id) {
+          this.impTasks[i].title = newTask.title;
+          this.impTasks[i].description = newTask.description;
+        }
+      }
+    }
+  }
+
   addTaskList(task) {
     if(task.type == 'Normal') {
       this.tasks.push(task)
     } else {
       this.impTasks.push(task)
     }
+  }
+
+  //EDIT BUTTON FUNCTION
+  editThis(task) {
+    this.updateID = task._id;
+
+    this.taskForm.controls['title'].setValue(task.title);
+    this.taskForm.controls['desc'].setValue(task.description);
+    this.taskForm.controls['type'].setValue(task.type);
   }
 
   deleteThis(task) {

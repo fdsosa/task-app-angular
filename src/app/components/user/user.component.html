@@ -31,7 +31,7 @@
                     <h5 class="card-title">{{ task.title }}</h5>
                     <p class="card-text">{{ task.description }}</p>
                     <div class="editButtons">
-                        <i class="far fa-edit"></i>
+                        <i (click)="editThis(task)" class="far fa-edit"></i>
                         <i (click)="deleteThis(task)" class="far fa-trash-alt"></i>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                     <h5 class="card-title">{{ impTask.title }}</h5>
                     <p class="card-text">{{ impTask.description }}</p>
                     <div class="editButtons">
-                        <i class="far fa-edit"></i>
+                        <i (click)="editThis(impTask)" class="far fa-edit"></i>
                         <i (click)="deleteThis(impTask)" class="far fa-trash-alt"></i>
                     </div>
                 </div>

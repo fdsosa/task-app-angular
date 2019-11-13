@@ -13,16 +13,12 @@ export class TaskService {
   readonly URL_API = 'http://localhost:3000/api';
   data = JSON.parse(localStorage.getItem('USER_NAME'));
   username = this.data.name;
+  selectedTask: TaskI;
 
   constructor(private httpClient: HttpClient) { }
 
   createTask (task: TaskI){
     return this.httpClient.post(`${this.URL_API}/user`, task)
-    .pipe(tap(
-      (res) => { 
-        console.log(res); 
-      }
-    ))
   }
 
   getTasks () {
@@ -31,6 +27,10 @@ export class TaskService {
 
   deleteTask (id: string) {
     return this.httpClient.delete(`${this.URL_API}/user/${this.username}/${id}`)
+  }
+
+  editTask (id: string, task: TaskI) {
+    return this.httpClient.put(`${this.URL_API}/user/${this.username}/${id}`, task)
   }
 
 }  
