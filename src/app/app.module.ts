@@ -39,7 +39,7 @@ const appRoutes: Routes = [
     component: JoinComponent
   },
   {
-    path: 'user',
+    path: 'user/:id',
     component: UserComponent,
     canActivate: [AuthGuard]
   },

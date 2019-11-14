@@ -73,7 +73,7 @@ export class JoinComponent implements OnInit {
 
     this.authService.register(this.registerModel)
       .subscribe(
-        res => {this.router.navigateByUrl('/user')},
+        res => {this.router.navigateByUrl(`/user/${res.dataUser.name}`)},
         err => {this.handleError(err)}
       )
   }

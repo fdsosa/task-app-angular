@@ -1,52 +1,63 @@
 <app-header></app-header>
 <div class="container align-items-start d-flex justify-content-center boxTask">
-    <form>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" id="taskForm">
         <h4 class="text-center">Add Task</h4>
         <div class="form-group">
-            <label for="exampleFormControlInput1">Title</label>
-            <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Insert title...">
+            <label for="title">Title</label>
+            <input type="name" class="form-control" id="title" formControlName="title" placeholder="Insert title...">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlInput1">Description</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Insert description...">
+            <label for="desc">Description</label>
+            <input type="email" class="form-control" id="desc" formControlName="desc" placeholder="Insert description...">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlSelect1">Select a type</label>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <label for="type">Select a type</label>
+            <select class="form-control" id="type" formControlName="type">
                 <option>Normal</option>
                 <option>Important</option>
             </select>
         </div>
-        <button type="button" class="btn btn-primary w-100 mt-3 mb-2">Submit</button>
+        <button type="submit" class="btn btn-primary w-100 mt-3 mb-2">Submit</button>
     </form>
     <div class="taskList">
         <!-- NORMAL TASKS -->
-        <div class="card bg-light mb-4" *ngIf="nomralTasks">
+        <div class="card bg-light mb-4">
             <div class="card-header bg-primary ">
-            Normal Tasks
-            <a href="#"><i class="fas fa-angle-double-down"></i></a>
+                Normal Tasks
+                <a (click)="toggleTasks(normalTasks)"><i class="fas fa-angle-double-down"></i></a>
             </div>
-            <div class="card-body">
-            <h5 class="card-title">Task Title</h5>
-            <p class="card-text">Description of the task to do.</p>
-            </div>
-            <div class="card-body">
-            <h5 class="card-title">Task Title</h5>
-            <p class="card-text">Description of the task to do.</p>
+            <div #normalTasks>
+                <div class="card-body" *ngFor="let task of tasks" >
+                    <h5 class="card-title">{{ task.title }}</h5>
+                    <p class="card-text">{{ task.description }}</p>
+                    <div class="doneButton">
+                        <button type="button"  (click)="deleteThis(task)" class="btn btn-success">Done</button>
+                    </div>
+                    <div class="editButtons">
+                        <i (click)="editThis(task)" class="far fa-edit"></i>
+                        <i (click)="deleteThis(task)" class="far fa-trash-alt"></i>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- IMPORTANT TASKS -->
-        <div class="card bg-light mb-4" *ngIf="importantTasks">
+        <div class="card bg-light mb-4">
             <div class="card-header bg-danger">
-            Important Tasks
+                Important Tasks
+                <a (click)="toggleTasks(importantTasks)"><i class="fas fa-angle-double-down"></i></a>
             </div>
-            <div class="card-body">
-            <h5 class="card-title">Task Title</h5>
-            <p class="card-text">Description of the task to do.</p>
-            </div>
-            <div class="card-body">
-            <h5 class="card-title">Task Title</h5>
-            <p class="card-text">Description of the task to do.</p>
+            <div #importantTasks>
+                <div class="card-body" *ngFor="let impTask of impTasks">
+                    <h5 class="card-title">{{ impTask.title }}</h5>
+                    <p class="card-text">{{ impTask.description }}</p>
+                    <div class="doneButton">
+                        <button type="button"  (click)="deleteThis(impTask)" class="btn btn-success">Done</button>
+                    </div>
+                    <div class="editButtons">
+                        <i (click)="editThis(impTask)" class="far fa-edit"></i>
+                        <i (click)="deleteThis(impTask)" class="far fa-trash-alt"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -19,12 +19,14 @@ export class HeaderComponent implements OnInit {
       this.token = true;
     }
 
-    if(localStorage.getItem('USER_NAME')) { this.name = localStorage.getItem('USER_NAME') }
+    if(localStorage.getItem('USER_NAME')) { 
+      let data = JSON.parse(localStorage.getItem('USER_NAME'));
+      this.name = data.name;
+    }
   }
 
   toggleMenu(menu: any){
-
- 
+    
     if(menu.style.display == "none" || menu.style.display == '') {
       menu.style.display = "block";
     }else{
