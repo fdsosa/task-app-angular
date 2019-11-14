@@ -29,18 +29,28 @@
 
         .card-body{
             border-bottom: .5px solid rgba(0, 0, 0, 0.4);
-            padding-bottom: 2rem;
+            padding-bottom: 4.6rem;
         
             p{
                 margin-bottom: .5rem;
             }
 
             .editButtons{
+                margin-top: 2rem;
                 float: right;
 
                 i{
                     margin: .5rem .25rem;
                     cursor: pointer;
+                }
+            }
+
+            .doneButton{
+                margin-top: 2rem;
+                float: left;
+
+                .btn {
+                    padding: 0.3rem 0.6rem;
                 }
             }
 

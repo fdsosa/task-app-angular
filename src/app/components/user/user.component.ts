@@ -90,17 +90,7 @@ export class UserComponent implements OnInit {
     }
   }
 
-
-
-  //TOGGLE TASKS FUNCTION
-  toggleTasks(taskBox: any) {
-    if(taskBox.style.display == 'block' || taskBox.style.display == ''){
-      taskBox.style.display = 'none';
-    }else{
-      taskBox.style.display = 'block';
-    }
-  }
-
+  //LIST TASKS
   listTasks(tasks) {
     this.tasks = [];
     this.impTasks = [];
@@ -135,6 +125,7 @@ export class UserComponent implements OnInit {
     }
   }
 
+  //ADD TASK TO LIST(VIEW)
   addTaskList(task) {
     if(task.type == 'Normal') {
       this.tasks.push(task)
@@ -152,6 +143,7 @@ export class UserComponent implements OnInit {
     this.taskForm.controls['type'].setValue(task.type);
   }
 
+  //DELETE BUTTON FUNCTION
   deleteThis(task) {
     console.log(task);
     this.taskService.deleteTask(task._id)
@@ -172,4 +164,12 @@ export class UserComponent implements OnInit {
   // convenience getter for easy access to form fields
   get controls() { return this.taskForm.controls }
 
+  //TOGGLE TASKS FUNCTION
+  toggleTasks(taskBox: any) {
+    if(taskBox.style.display == 'block' || taskBox.style.display == ''){
+      taskBox.style.display = 'none';
+    }else{
+      taskBox.style.display = 'block';
+    }
+  }
 }

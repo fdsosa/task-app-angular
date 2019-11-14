@@ -30,6 +30,9 @@
                 <div class="card-body" *ngFor="let task of tasks" >
                     <h5 class="card-title">{{ task.title }}</h5>
                     <p class="card-text">{{ task.description }}</p>
+                    <div class="doneButton">
+                        <button type="button"  (click)="deleteThis(task)" class="btn btn-success">Done</button>
+                    </div>
                     <div class="editButtons">
                         <i (click)="editThis(task)" class="far fa-edit"></i>
                         <i (click)="deleteThis(task)" class="far fa-trash-alt"></i>
@@ -47,6 +50,9 @@
                 <div class="card-body" *ngFor="let impTask of impTasks">
                     <h5 class="card-title">{{ impTask.title }}</h5>
                     <p class="card-text">{{ impTask.description }}</p>
+                    <div class="doneButton">
+                        <button type="button"  (click)="deleteThis(impTask)" class="btn btn-success">Done</button>
+                    </div>
                     <div class="editButtons">
                         <i (click)="editThis(impTask)" class="far fa-edit"></i>
                         <i (click)="deleteThis(impTask)" class="far fa-trash-alt"></i>
